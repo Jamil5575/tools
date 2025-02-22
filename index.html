@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your one-stop solution for all image and PDF tools. Compress, convert, edit, and optimize your files with ease.">
+    <meta name="keywords" content="image tools, PDF tools, compress images, edit PDF, online tools">
+    <meta name="author" content="Your Name">
+    <title>Tools Website - Home</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Tool Categories */
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category h2 {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .tool-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .tool-card button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .tool-card button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer .footer-links {
+            margin-bottom: 10px;
+        }
+
+        footer .footer-links a {
+            margin: 0 10px;
+            color: #4CAF50;
+            font-size: 1rem;
+        }
+
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 10px 0 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .tool-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .tool-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Tools Website</h1>
+        <p>Your one-stop solution for all image and PDF tools.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Image Tools Section -->
+        <section class="category">
+            <h2>Image Tools</h2>
+            <div class="tool-grid">
+               <div class="tool-card">
+               <a href="tools/img-compress.html" style="text-decoration: none; color: inherit;">
+               <img src="https://cdn-icons-png.flaticon.com/512/3022/3022851.png" alt="Compress Image">
+                <h3>Compress Image</h3>
+              <p>Reduce the size of your images without losing quality.</p>
+              <button>Use Tool</button>
+              </a>
+             </div>
+                <div class="tool-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="Convert Image">
+                    <h3>Convert Image</h3>
+                    <p>Convert images to different formats like JPEG, PNG, and WebP.</p>
+                    <button onclick="location.href='convert-image.html'">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712139.png" alt="Resize Image">
+                    <h3>Resize Image</h3>
+                    <p>Resize images to specific dimensions easily.</p>
+                    <button onclick="location.href='resize-image.html'">Use Tool</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PDF Tools Section -->
+        <section class="category">
+            <h2>PDF Tools</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3379/3379321.png" alt="Compress PDF">
+                    <h3>Compress PDF</h3>
+                    <p>Reduce the size of your PDF files without losing quality.</p>
+                    <button onclick="location.href='compress-pdf.html'">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3379/3379334.png" alt="Merge PDF">
+                    <h3>Merge PDF</h3>
+                    <p>Combine multiple PDF files into one.</p>
+                    <button onclick="location.href='merge-pdf.html'">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3379/3379340.png" alt="Split PDF">
+                    <h3>Split PDF</h3>
+                    <p>Split a PDF into multiple smaller files.</p>
+                    <button onclick="location.href='split-pdf.html'">Use Tool</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <p>&copy; 2023 Tools Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
