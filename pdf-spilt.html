@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Split your PDF files online with our fully responsive PDF splitter tool.">
+    <meta name="keywords" content="PDF splitter, split PDF, online PDF tools, PDF editor">
+    <meta name="author" content="Your Name">
+    <title>PDF Splitter Tool</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Splitter Tool */
+        #splitter-tool {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #splitter-tool input[type="file"] {
+            display: none;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .upload-label:hover {
+            background-color: #45a049;
+        }
+
+        #page-range {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        #split-btn, #reset-btn {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #split-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #split-btn:hover {
+            background-color: #45a049;
+        }
+
+        #reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #reset-btn:hover {
+            background-color: #e53935;
+        }
+
+        #loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        #output a {
+            display: block;
+            margin: 10px 0;
+            color: #2196F3;
+            text-decoration: none;
+        }
+
+        #output a:hover {
+            text-decoration: underline;
+        }
+
+        /* AdSense Styling */
+        .adsbygoogle {
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>PDF Splitter Tool</h1>
+    </header>
+
+    <main>
+        <!-- Top Ad Unit -->
+        <section id="ad-top">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
+        <!-- Splitter Tool -->
+        <section id="splitter-tool">
+            <input type="file" id="pdf-input" accept="application/pdf">
+            <label for="pdf-input" class="upload-label">Upload PDF</label>
+
+            <input type="text" id="page-range" placeholder="Page Range (e.g., 1-3, 5-7)">
+            <button id="split-btn">Split PDF</button>
+            <button id="reset-btn">Reset</button>
+
+            <div id="loading">Splitting... <span class="loader"></span></div>
+            <div id="output"></div>
+        </section>
+
+        <!-- Bottom Ad Unit -->
+        <section id="ad-bottom">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PDF Splitter Tool. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript Functionality
+        const pdfInput = document.getElementById('pdf-input');
+        const pageRangeInput = document.getElementById('page-range');
+        const splitBtn = document.getElementById('split-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const loading = document.getElementById('loading');
+        const outputDiv = document.getElementById('output');
+
+        // Handle PDF upload
+        pdfInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                // Display file name or other metadata if needed
+            }
+        });
+
+        // Split PDF
+        splitBtn.addEventListener('click', async () => {
+            if (!pdfInput.files[0]) {
+                alert('Please upload a PDF file first.');
+                return;
+            }
+
+            const pageRange = pageRangeInput.value.trim();
+            if (!pageRange || !/^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(pageRange)) {
+                alert('Please enter a valid page range (e.g., 1-3, 5-7).');
+                return;
+            }
+
+            loading.style.display = 'block';
+            outputDiv.innerHTML = '';
+
+            try {
+                const file = pdfInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = async (event) => {
+                    const pdfData = new Uint8Array(event.target.result);
+
+                    // Use a PDF library like PDF-LIB or a server-side solution for splitting
+                    const splitPdfs = await splitPdf(pdfData, pageRange);
+
+                    // Display download links for split PDFs
+                    outputDiv.innerHTML = splitPdfs.map((pdf, index) => `
+                        <a href="${pdf.url}" download="split-pdf-${index + 1}.pdf">Download Part ${index + 1}</a>
+                    `).join('');
+
+                    // Hide loading spinner
+                    loading.style.display = 'none';
+                };
+
+                reader.readAsArrayBuffer(file);
+            } catch (error) {
+                alert('An error occurred while splitting the PDF. Please try again.');
+                console.error(error);
+                loading.style.display = 'none';
+            }
+        });
+
+        // Simulate PDF splitting (replace with actual splitting logic)
+        async function splitPdf(pdfData, pageRange) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const splitPdfs = [
+                        { url: URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' })) },
+                        { url: URL.createObjectURL(new Blob([pdfData], { type: 'application/pdf' })) },
+                    ];
+                    resolve(splitPdfs); // Simulate splitting
+                }, 1000);
+            });
+        }
+
+        // Reset tool
+        resetBtn.addEventListener('click', () => {
+            pdfInput.value = '';
+            pageRangeInput.value = '';
+            outputDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
