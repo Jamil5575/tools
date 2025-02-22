@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compress your PDF files online with our fully responsive PDF compressor tool.">
+    <meta name="keywords" content="PDF compressor, compress PDF, online PDF tools, PDF editor">
+    <meta name="author" content="Your Name">
+    <title>PDF Compressor Tool</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Compressor Tool */
+        #compressor-tool {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #compressor-tool input[type="file"] {
+            display: none;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .upload-label:hover {
+            background-color: #45a049;
+        }
+
+        #file-size {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        #compress-btn, #reset-btn, #download-btn {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #compress-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #compress-btn:hover {
+            background-color: #45a049;
+        }
+
+        #reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #reset-btn:hover {
+            background-color: #e53935;
+        }
+
+        #download-btn {
+            background-color: #2196F3;
+            color: white;
+            display: none;
+        }
+
+        #download-btn:hover {
+            background-color: #1e88e5;
+        }
+
+        #loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        /* AdSense Styling */
+        .adsbygoogle {
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>PDF Compressor Tool</h1>
+    </header>
+
+    <main>
+        <!-- Top Ad Unit -->
+        <section id="ad-top">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
+        <!-- Compressor Tool -->
+        <section id="compressor-tool">
+            <input type="file" id="pdf-input" accept="application/pdf">
+            <label for="pdf-input" class="upload-label">Upload PDF</label>
+
+            <div id="file-size"></div>
+
+            <button id="compress-btn">Compress PDF</button>
+            <button id="reset-btn">Reset</button>
+            <button id="download-btn">Download Compressed PDF</button>
+
+            <div id="loading">Compressing... <span class="loader"></span></div>
+            <div id="output"></div>
+        </section>
+
+        <!-- Bottom Ad Unit -->
+        <section id="ad-bottom">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+                 data-ad-slot="0987654321"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PDF Compressor Tool. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript Functionality
+        const pdfInput = document.getElementById('pdf-input');
+        const fileSizeDiv = document.getElementById('file-size');
+        const compressBtn = document.getElementById('compress-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const loading = document.getElementById('loading');
+        const outputDiv = document.getElementById('output');
+
+        let originalFileSize = 0;
+
+        // Handle PDF upload
+        pdfInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                originalFileSize = (file.size / 1024).toFixed(2); // Convert to KB
+                fileSizeDiv.textContent = `Original File Size: ${originalFileSize} KB`;
+            }
+        });
+
+        // Compress PDF
+        compressBtn.addEventListener('click', async () => {
+            if (!pdfInput.files[0]) {
+                alert('Please upload a PDF file first.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            outputDiv.innerHTML = '';
+
+            const file = pdfInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = async (event) => {
+                const pdfData = new Uint8Array(event.target.result);
+
+                // Use a PDF library like PDF-LIB or a server-side solution for compression
+                // For demonstration, we'll simulate compression by reducing file size by 50%
+                const compressedData = await simulateCompression(pdfData);
+
+                const compressedBlob = new Blob([compressedData], { type: 'application/pdf' });
+                const compressedUrl = URL.createObjectURL(compressedBlob);
+
+                // Show download button
+                downloadBtn.style.display = 'inline-block';
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = compressedUrl;
+                    link.download = `compressed-pdf.pdf`;
+                    link.click();
+                };
+
+                // Display compressed file size
+                const compressedFileSize = (compressedBlob.size / 1024).toFixed(2); // Convert to KB
+                fileSizeDiv.textContent += ` | Compressed File Size: ${compressedFileSize} KB`;
+
+                // Hide loading spinner
+                loading.style.display = 'none';
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+
+        // Simulate PDF compression (replace with actual compression logic)
+        async function simulateCompression(data) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(data.slice(0, Math.floor(data.length / 2))); // Simulate 50% compression
+                }, 1000);
+            });
+        }
+
+        // Reset tool
+        resetBtn.addEventListener('click', () => {
+            pdfInput.value = '';
+            fileSizeDiv.textContent = '';
+            downloadBtn.style.display = 'none';
+            outputDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
